@@ -11,11 +11,12 @@ const Header = dynamic(()=> import('@/components/common/header'),{ssr:false})
 export default function App (props: AboutPageProps) {
   const router = useRouter();
   const [postList, setPostList] = useState([])
-  const page = Number(router.query?.page) || 1
+  const page = router.query?.page
   console.log('router:', router.query)
-
+  
   // RUN IN CLIENT
   useEffect(() => {
+    if(!page) return;
     (async ()=>{
       const response = await fetch(`https://js-post-api.herokuapp.com/api/posts?_page=${page}`)
       const data = await response.json();
@@ -30,7 +31,7 @@ export default function App (props: AboutPageProps) {
     router.push({
       pathname:'/about',
       query:{
-        page : (Number(router.query?.page) || 1) + 1,
+        page : (Number(page) || 1) + 1,
       }
     },undefined,{
       shallow:true

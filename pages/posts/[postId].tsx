@@ -31,7 +31,7 @@ export const getStaticPaths : GetStaticPaths = async () => {
 
   return {
     paths: data.data.map( (post:any) => ({params:{postId:post.id }})),
-    fallback: false,
+    fallback: true,
   }
 }
 
@@ -45,12 +45,13 @@ export const getStaticProps : GetStaticProps<PostPageProps> = async (context:Get
 
   const response = await fetch(`https://js-post-api.herokuapp.com/api/posts/${postId}`)
   const data = await response.json();
-  // console.log('data:', data);
+  // console.log('data:', data); 
 
   return {
     props:{
       post: data,
-    }
+    },
+    revalidate:5
   }
 }
 
