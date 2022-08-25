@@ -18,9 +18,8 @@ export const getStaticProps : GetStaticProps<PostListPageProps> = async (context
   // server side
   // build - time
   console.log("static props");
-  const response = await fetch('https://js-post-api.herokuapp.com/api/posts?_page=1')
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts')
   const data = await response.json();
-  console.log('data:', data);
 
   return {
     props:{
