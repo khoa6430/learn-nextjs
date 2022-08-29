@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import * as React from 'react';
-import '../../styles/test.css'
+
 export interface PostListPageProps {
   posts : any[]
 }
@@ -21,7 +21,6 @@ export default function PostListPage({posts}: PostListPageProps) {
             </Link>
           </li>)}
         </ul>
-
     </div>
   );
 }
