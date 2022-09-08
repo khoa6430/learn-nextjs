@@ -22,7 +22,8 @@ export default function handler(
     //api student
     //http://js-post-api.herokuapp.com/api/students/
     proxy.web(req,res,{
-        target : process.env.API_URL,
+        // target : process.env.API_URL,
+        target : 'https://js-post-api.herokuapp.com',
         changeOrigin : true,
         selfHandleResponse:false,
     })
