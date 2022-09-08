@@ -13,7 +13,7 @@ export default function PostDetailPage ({post}: PostPageProps) {
     if(!post) return null;
 
   return (
-    <div>
+    <div>  
       <h1>Post Detail Page</h1>
 
       <p>{post.title}</p>

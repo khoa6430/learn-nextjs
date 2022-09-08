@@ -17,9 +17,10 @@
     "baseUrl": ".",
     "paths" : {
       "@/components/*" : ["./components/*"],
-      "@/styles/*" : ["./components/*"],
-      "@/constants/*" : ["./components/*"],
-      "@/hooks/*" : ["./components/*"],
+      "@/styles/*" : ["./styles/*"],
+      "@/constants/*" : ["./constants/*"],
+      "@/hooks/*" : ["./hooks/*"],
+      "@/models/*" : ["./models/*"],
     }
      
   },
