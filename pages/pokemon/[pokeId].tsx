@@ -57,7 +57,7 @@ export const getStaticPaths : GetStaticPaths = async () => {
   
     // server side
     // build - time
-    console.log("\n GET STATIC PROPS",context.params?.pokeId);
+    // console.log("\n GET STATIC PROPS",context.params?.pokeId);
     const pokeId = context.params?.pokeId
     if(!pokeId) return {notFound:true}
   

@@ -20,7 +20,7 @@ export default function PokemonListPage ({pokes}: PokemonProps) {
     //   `${API_URL}/posts?_start=${posts.length}&_limit=10`
     // );
     const dataListPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=40&offset=20`)
-    console.log('dataListPokemon:', dataListPokemon.data.results)
+    // console.log('dataListPokemon:', dataListPokemon.data.results)
 
     const dataListPokemonDetail = await Promise.all(dataListPokemon?.data.results.map(async (element:{ name: string; url: string })=>{
       try{
@@ -76,7 +76,7 @@ export default function PokemonListPage ({pokes}: PokemonProps) {
 export async function getServerSideProps() {
 
     const dataListPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=40&offset=20`)
-    console.log('dataListPokemon:', dataListPokemon.data.results)
+    // console.log('dataListPokemon:', dataListPokemon.data.results)
 
     const dataListPokemonDetail = await Promise.all(dataListPokemon?.data.results.map(async (element:{ name: string; url: string })=>{
       try{
