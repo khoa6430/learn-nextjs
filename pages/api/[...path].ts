@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import httpProxy from 'http-proxy'
+import { resolve } from 'path';
 // type Data = {
 //   name: string
 // }
@@ -17,6 +18,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  return new Promise((resolve)=>{
     //don't send cookies to API server
     req.headers.cookie = ''
     //api student
@@ -28,5 +30,8 @@ export default function handler(
         selfHandleResponse:false,
     })
 
-  // res.status(200).json({ name: 'PATH - Match all here' })
+    proxy.once('proxyRes',()=>{
+      resolve(true)
+    })
+  })
 }
