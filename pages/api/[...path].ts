@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import httpProxy from 'http-proxy'
 import { resolve } from 'path';
+import Cookies from 'cookies';
 // type Data = {
 //   name: string
 // }
@@ -19,6 +20,12 @@ export default function handler(
   res: NextApiResponse<any>
 ) {
   return new Promise((resolve)=>{
+    //convert cookies to header Authorization
+    const cookies = new Cookies(req,res);
+    const accessToken = cookies.get('access_token')
+    if(accessToken){
+      req.headers.Authorization = `Bearer ${accessToken}`
+    }
     //don't send cookies to API server
     req.headers.cookie = ''
     //api student

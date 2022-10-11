@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import httpProxy, { ProxyReqWsCallback, ProxyResCallback } from 'http-proxy'
 import { resolve } from 'path';
 import Cookies from 'cookies';
+
 type Data = {
   message: string
 }
@@ -30,18 +31,25 @@ export default function handler( req: NextApiRequest, res: NextApiResponse<Data>
         proxyRes.on('data',function(chunk){
           body+=chunk
         })
+         
         proxyRes.on('end',function(){
           try{
             const {accessToken,expiredAt} = JSON.parse(body)
 
             //convert token to cookies
-            const cookies = new Cookies(req,res)
+            const cookies = new Cookies(req,res,{secure:process.env.NODE_ENV !== 'development'});
+            cookies.set('access_token',accessToken,{
+              httpOnly:true,
+              sameSite:'lax',
+              expires:new Date(expiredAt)
+            });
 
             (res as NextApiResponse).status(200).json({message:'login successfully'})
+            throw new Error("error")
           }catch(error){
-            (res as NextApiResponse).status(500).json({message:'login sucessfully'})
+            (res as NextApiResponse).status(500).json({message:'something went wrong'})
           }
-
+          resolve(true);
         })
     };
     proxy.once('proxyRes',handleLoginResponse);
